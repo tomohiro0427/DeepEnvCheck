@@ -1,0 +1,26 @@
+version: "3.9"  # Composeファイルのバージョン（3.9は最新(2025)の安定版）
+
+services:       # サービス（コンテナ）の定義をまとめるセクション
+  cuda:         # サービス名（自由に変更可。ここでは "cuda"）
+    image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu24.04  # 使用するDockerイメージ
+    container_name: cuda-container  # コンテナ名を明示的に指定（省略可）
+
+    stdin_open: true   # 対話的入力を許可する（`-it` の一部、つまり `-i` 相当）
+    tty: true           # 仮想端末(TTY)を有効化（`-t` 相当）
+
+    volumes:            # ホストとコンテナ間のディレクトリ共有設定
+      - ~/workspace:/workspace  # ホスト側 ~/workspace をコンテナ内 /workspace にマウント（`-v` オプションと同じ）
+
+    deploy:             # GPUなどのハードウェアリソース設定を指定するセクション
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia        # NVIDIA GPUドライバを使用
+              count: 1               # 1つのGPUを使用 (全て使用する場合は `count: all` と指定)　
+              capabilities: [gpu]   # GPU機能を利用可能にする
+
+    working_dir: /workspace  # コンテナ起動時の作業ディレクトリを指定（オプション）
+
+    # （必要に応じて追加可能な例）
+    command: bash   # 起動時にbashを実行（常にシェルで立ち上げたい場合）
+

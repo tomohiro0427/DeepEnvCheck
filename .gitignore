@@ -1,0 +1,67 @@
+# ===================================
+# Python
+# ===================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env_name/
+*.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# ===================================
+# PyTorch / Deep Learning
+# ===================================
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.h5
+
+# Hugging Face cache
+~/.cache/huggingface/
+cache/
+datasets/
+huggingface/
+
+# ===================================
+# Logs / Outputs
+# ===================================
+logs/
+wandb/
+runs/
+outputs/
+checkpoints/
+*.log
+*.out
+
+# ===================================
+# System / Editor
+# ===================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# ===================================
+# Temporary
+# ===================================
+*.tmp
+*.bak
+*.old
+
+.github/
