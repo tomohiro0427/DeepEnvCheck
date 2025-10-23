@@ -1,0 +1,14 @@
+
+# Hugging Face
+transformers
+datasets
+
+# 画像処理
+pillow
+opencv-python-headless
+
+# データ分析・可視化
+tqdm
+pandas
+matplotlib
+seaborn

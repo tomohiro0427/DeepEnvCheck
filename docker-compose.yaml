@@ -21,4 +21,25 @@ services:       # サービス（コンテナ）の定義をまとめるセク�
 
     # （必要に応じて追加可能な例）
     command: bash   # 起動時にbashを実行（常にシェルで立ち上げたい場合）
+  cuda128conda:         # サービス名（自由に変更可。ここでは "cuda"）
+    image: tomohiro0427/ubuntu24cuda128:conda-python310-torch280  # 使用するDockerイメージ
+    container_name: aizawa-cuda128  # コンテナ名を明示的に指定（省略可）
 
+    stdin_open: true   # 対話的入力を許可する（`-it` の一部、つまり `-i` 相当）
+    tty: true           # 仮想端末(TTY)を有効化（`-t` 相当）
+
+    volumes:            # ホストとコンテナ間のディレクトリ共有設定
+      - ${PWD}:/workspace  # ホスト側 ${PWD} をコンテナ内 /workspace にマウント（`-v` オプションと同じ）
+
+    deploy:             # GPUなどのハードウェアリソース設定を指定するセクション
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]   # 両方を使用する場合、device_ids: ["0", "1"]
+              capabilities: [gpu]
+
+    working_dir: /workspace  # コンテナ起動時の作業ディレクトリを指定（オプション）
+
+    # （必要に応じて追加可能な例）
+    command: bash   # 起動時にbashを実行（常にシェルで立ち上げたい場合）
